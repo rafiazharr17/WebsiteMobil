@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invoice Pembelian</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+
+      header {
+        text-align: center;
+        padding: 20px;
+        background-color: #333;
+        color: #fff;
+      }
+
+      section {
+        margin: 20px 0;
+      }
+
+      .invoice-details {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .invoice-details img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      footer {
+        text-align: center;
+        padding: 5px;
+        color: #333; /* Warna teks footer */
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Invoice Pembelian</h1>
+    </header>
+
+    <section class="invoice-details">
+      <h2>Detail Pembelian</h2>
+      <p><strong>Nama Pelanggan:</strong> {{ nama_pelanggan }}</p>
+      <p><strong>Alamat:</strong> {{ alamat_pelanggan }}</p>
+      <p><strong>Nomor Telepon:</strong> {{ telepon_pelanggan }}</p>
+      <p><strong>Mobil yang Dipilih:</strong> {{ nama_mobil }}</p>
+      <img
+        src="{{ url_for('static', filename='images/' + gambar_mobil) }}"
+        alt="{{ nama_mobil }}"
+      />
+      <p><strong>Total Harga:</strong> ${{ total_harga }}</p>
+    </section>
+
+    <footer>
+      <p>&copy; 2024 Penjualan Mobil</p>
+    </footer>
+  </body>
+</html>

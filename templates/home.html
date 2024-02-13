@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Penjualan Mobil</title>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+
+      header {
+        text-align: center;
+        padding: 20px;
+        background-color: #333;
+        color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      section {
+        margin: 20px 0;
+      }
+
+      .car-listing {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .car-card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        margin: 10px;
+        padding: 10px;
+        width: 200px;
+        text-align: center;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .car-card:hover {
+        transform: scale(1.05);
+      }
+
+      .car-card img {
+        max-width: 100%;
+        max-height: 150px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+      }
+
+      form {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 10px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      form label {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      form input,
+      form textarea {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+
+      form button {
+        background-color: #333;
+        color: #fff;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+      }
+
+      form button:hover {
+        background-color: #555;
+      }
+
+      footer {
+        text-align: center;
+        padding: 5px;
+        color: #333; /* Warna teks footer */
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Penjualan Mobil</h1>
+    </header>
+
+    <section>
+      <h2>Mobil Tersedia</h2>
+      <div class="car-listing">
+        {% for car in cars %}
+        <div class="car-card">
+          <img
+            src="{{ url_for('static', filename='images/' + car['gambar']) }}"
+            alt="{{ car['nama'] }}"
+          />
+          <h3>{{ car['nama'] }}</h3>
+          <p>Harga: ${{ car['harga'] }}</p>
+          <form action="/proses-pembelian" method="post">
+            <input type="hidden" name="mobil_id" value="{{ car['id'] }}" />
+            <label for="nama">Nama Pelanggan:</label>
+            <input type="text" id="nama" name="nama" required />
+
+            <label for="alamat">Alamat:</label>
+            <textarea id="alamat" name="alamat" rows="4" required></textarea>
+
+            <label for="telepon">Nomor Telepon:</label>
+            <input type="tel" id="telepon" name="telepon" required />
+
+            <button type="submit">Beli</button>
+          </form>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; 2024 Penjualan Mobil</p>
+    </footer>
+  </body>
+</html>
